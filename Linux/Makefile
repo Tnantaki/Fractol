@@ -7,7 +7,7 @@ MLX_PATH	= mlx_Linux/
 
 
 ### Source Files ###
-FRACT_SRCS = fractol.c ft_hook.c
+FRACT_SRCS = fractol.c ft_hook.c ft_putpix.c ft_render.c
 
 ### Compilation ###
 CC		= gcc

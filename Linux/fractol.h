@@ -38,11 +38,19 @@ typedef struct	s_param//Param structure
 	t_pix	pix;
 	int		mouse_scro;
 	int		pos_x;
+	int		pos_y;
+	int		w;
+	int		h;
 }	t_param;
 
 //hook
 int	close(t_param *par);
 int	key_hook(int keycode, t_param *par);
 int	mouse_hook(int keycode, int x, int y, t_param *par);
+//render
+int render_next_frame(t_param *par);
+int render_rec(t_param *par);
+//put_pixel
+void	my_put_pixel(t_pix *pix, int x, int y, int color);
 
 #endif
