@@ -50,7 +50,7 @@ typedef struct	s_param//Param structure
 }	t_param;
 
 //hook
-int	close(t_param *par);
+int	close_win(t_param *par);
 int	key_hook(int keycode, t_param *par);
 int	mouse_hook(int keycode, int x, int y, t_param *par);
 //render

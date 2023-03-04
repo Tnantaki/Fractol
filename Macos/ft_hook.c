@@ -1,6 +1,6 @@
 #include "fractol.h"
 
-int	close(t_param *par)
+int	close_win(t_param *par)
 {
 	mlx_destroy_window(par->mlx, par->win);
 	exit (0);
@@ -10,7 +10,7 @@ int	close(t_param *par)
 int	key_hook(int keycode, t_param *par)
 {
 	if (keycode == 53)
-		close(par);
+		close_win(par);
 	else if (keycode == 13)
 	{
 

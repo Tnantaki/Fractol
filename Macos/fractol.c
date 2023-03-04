@@ -79,7 +79,7 @@ int main(void)
 	// render_rec(&par, par.w, par.h, par.pos_x, par.pos_y);
 	mlx_key_hook(par.win, key_hook, &par); // keyboard hook
 	mlx_mouse_hook(par.win, mouse_hook, &par); // mouse hook
-	mlx_hook(par.win, 17, 0, close, &par);	   // keycode hook
+	mlx_hook(par.win, 17, 0, close_win, &par);	   // keycode hook
 	// mlx_loop_hook(par.mlx, render_next_frame, &par);
 	mlx_loop(par.mlx); // Make Window are staying
 	// free(par.mlx);	   // free init variable
