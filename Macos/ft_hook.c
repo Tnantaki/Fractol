@@ -12,7 +12,10 @@ int	key_hook(int keycode, t_param *par)
 	if (keycode == 53)
 		close(par);
 	else if (keycode == 13)
-		par->pos_y++;
+	{
+
+	}
+		// par->pos_y++;
 	printf("Key code: %d\n", keycode);
 	return (0);
 }

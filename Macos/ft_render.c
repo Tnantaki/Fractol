@@ -1,31 +1,31 @@
 #include "fractol.h"
 
-// void render_backgroud(t_param *par)
-// {
-// 	for (int i = 0; i < WD_HEIGHT; i++)
-// 	{
-// 		for (int j = 0; j < WD_WIDTH; j++)
-// 			mlx_pixel_put(par->mlx, par->win, j, i, 0x00FFFF);
-// 	}
-// }
+void render_backgroud(t_param *par)
+{
+	for (int i = 0; i < WD_HEIGHT; i++)
+	{
+		for (int j = 0; j < WD_WIDTH; j++)
+			mlx_pixel_put(par->mlx, par->win, j, i, 0x00FFFF);
+	}
+}
 
 // void render_point(t_param *par)
 // {
 // 	mlx_pixel_put(par->mlx, par->win, 10, 10, RED_PIXEL);
 // }
 
-int render_rec(t_param *par)
+int render_rec(t_param *par, t_obj box, int color)
 {
-	int	width = par->h + par->pos_y;
-	int	height = par->w + par->pos_x;
-	int	y = par->pos_y;
-	int	x = par->pos_x;
+	int	width = box.h + box.y;
+	int	height = par->w + box.x;
+	int	y = box.y;
+	int	x = box.x;
 	for (int i = y; i < width; i++)
 	{
 		for (int j = x; j < height; j++)
-			my_put_pixel(&par->pix, j, i, RED_PIXEL);
-			// mlx_pixel_put(par->mlx, par->win, j, i, GREEN_PIXEL);
+			my_put_pixel(&par->img_dt, j, i, color);
 	}
+	mlx_put_image_to_window(par->mlx, par->win, par->img_dt.img, 0, 0);
 	return (0);
 }
 
