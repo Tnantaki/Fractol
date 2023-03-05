@@ -1,29 +1,25 @@
 #include "fractol.h"
 
-void render_backgroud(t_param *par)
+void render_background(t_param *par, int color)
 {
 	for (int i = 0; i < WD_HEIGHT; i++)
 	{
 		for (int j = 0; j < WD_WIDTH; j++)
-			mlx_pixel_put(par->mlx, par->win, j, i, 0x00FFFF);
+			put_pixel_to_image(&par->img_dt, j, i, color);
 	}
+	mlx_put_image_to_window(par->mlx, par->win, par->img_dt.img, 0, 0);
 }
-
-// void render_point(t_param *par)
-// {
-// 	mlx_pixel_put(par->mlx, par->win, 10, 10, RED_PIXEL);
-// }
 
 int render_rec(t_param *par, t_obj box, int color)
 {
 	int	width = box.h + box.y;
-	int	height = par->w + box.x;
+	int	height = box.w + box.x;
 	int	y = box.y;
 	int	x = box.x;
 	for (int i = y; i < width; i++)
 	{
 		for (int j = x; j < height; j++)
-			my_put_pixel(&par->img_dt, j, i, color);
+			put_pixel_to_image(&par->img_dt, j, i, color);
 	}
 	mlx_put_image_to_window(par->mlx, par->win, par->img_dt.img, 0, 0);
 	return (0);
@@ -91,8 +87,9 @@ int render_rec(t_param *par, t_obj box, int color)
 // 	}
 // }
 
-int render_next_frame(t_param *par)
+int render_next_frame(t_param *par, t_obj *boxA)
 {
+	render_rec(&par, *boxA, RED_PIXEL);
 	// ft_render(par, par->pos_x);
 	// par->pos_x++;
 	// ft_render_ver(par, par->pos_y);

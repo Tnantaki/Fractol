@@ -1,6 +1,6 @@
 #include "fractol.h"
 
-void	my_put_pixel(t_img_data *img_dt, int x, int y, int color)
+void	put_pixel_to_image(t_img_data *img_dt, int x, int y, int color)
 {
 	char	*dst;
 

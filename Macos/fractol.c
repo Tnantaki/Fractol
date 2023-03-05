@@ -33,9 +33,45 @@ void init_window(t_param *par)
 	}
 }
 
-int	move_ob(t_param *par)
+char *join_path(char *s1, char *s2)
 {
-	return (0);
+	char	*str;
+	size_t	len_s1;
+	size_t	len_s2;
+	size_t	i;
+	size_t	j;
+
+	len_s1 = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
+	str = malloc(sizeof(char) * (len_s1 + len_s2 + 5));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (i < len_s1)
+		str[i++] = *s1++;
+	while (i < len_s1 + len_s2)
+		str[i++] = *s2++;
+	j = 0;
+	while (i < len_s1 + len_s2 + 5)
+		str[i++] = ".xpm"[j++];
+	return (str);
+}
+
+void	set_object(t_param *par, void ***banana)
+{
+	int		i;
+	char	*path;
+
+	i = 0;
+	while (i < 8)
+	{
+		path = join_path("xmp/file/", ft_itoa(i));
+		printf("%s\n", path);
+		exit (0);
+		(*banana)[i++] = mlx_xpm_file_to_image(par->mlx, path, 0, 0);
+		free(path);
+	}
+
 }
 
 void	setup_box(t_obj *box, int x, int y, int h, int w)
@@ -46,34 +82,36 @@ void	setup_box(t_obj *box, int x, int y, int h, int w)
 	box->w = w;
 }
 
-
 int main(void)
 {
 	t_param	par;
 	t_obj	boxA;
 	t_obj	boxB;
+	t_obj	boxC;
+	void	*banana[9];
 
 	init_window(&par);// create window
 	par.mouse_scro = 0;
-	setup_box(&boxA, 5, 5, 200, 200);
-	setup_box(&boxB, 105, 105, 200, 200);
-
+	setup_box(&boxA, 100, 10, 200, 200);
+	setup_box(&boxB, 10, 100, 200, 200);
+	setup_box(&boxC, 150, 100, 200, 200);
 	par.img_dt.img = mlx_new_image(par.mlx, WD_WIDTH, WD_HEIGHT);
 	par.img_dt.addr = mlx_get_data_addr(par.img_dt.img, &par.img_dt.bpp, &par.img_dt.line_len, &par.img_dt.endian);
-	// printf("image : %p \n", par.img_dt.img);
+	set_object(&par, &banana);
 
+	// printf("image : %p \n", par.img_dt.img);
 	// printf("bpp:%d\n", par.img_dt.bpp);
 	// printf("line_len:%d\n", par.img_dt.line_len);
 	// printf("endian:%d\n", par.img_dt.endian);
 
-	par.pos_x = 5;
-	par.pos_y = 5;
-	par.w = 300;
-	par.h = 300;
-	render_rec(&par, boxA, RED_PIXEL);
-	render_rec(&par, boxB, GREEN_PIXEL);
-	// while (par.pos_x < 300)
-		// my_put_pixel(&par.img_dt, par.pos_x++, par.pos_y, RED_PIXEL);
+	// par.pos_x = 5;
+	// par.pos_y = 5;
+	// par.w = 300;
+	// par.h = 300;
+	render_background(&par, WHITE_PIXEL);
+	// render_rec(&par, boxA, RED_PIXEL);
+	// render_rec(&par, boxB, GREEN_PIXEL);
+	// render_rec(&par, boxC, BLUE_PIXEL);
 	// mlx_loop_hook(par.mlx, render_rec, &par);
 	// mlx_put_image_to_window(par.mlx, par.win, par.img_dt.img, 0, 0);
 	// render_rec(&par, par.w, par.h, par.pos_x, par.pos_y);
